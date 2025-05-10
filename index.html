@@ -1,181 +1,433 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday!</title>
+    <title>一个月纪念日快乐！</title>
     <style>
-        body {
+        @import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap');
+        
+        * {
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background-color: #fff8f8;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        p {
+            text-indent: 2em;
+        }
+
+        .english {
+            font-family: 'Brush Script MT', 'Comic Sans MS', 'Tangerine', cursive;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 100%;
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-        }
-
-        .card {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            transition: all 0.5s ease;
             position: relative;
-            z-index: 2;
         }
-
-        .card h1 {
+        
+        header {
+            width: 100%;
+            padding: 2rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1 {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 400;
+            animation: fadeIn 2s ease 0.5s both;
+        }
+        
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: float 4s ease-in-out infinite;
+            opacity: 0.6;
+        }
+        
+        .content {
+            max-width: 800px;
+            width: 90%;
+            padding: 3rem 2rem;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            margin-top: -2rem;
+            z-index: 10;
+            animation: slideUp 1s ease 0.8s both;
+        }
+        
+        .message {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .timeline {
+            margin: 3rem 0;
+            position: relative;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .milestone {
+            display: flex;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .milestone:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+        
+        .milestone-content {
+            width: 45%;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background-color: #fff8f8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .milestone:nth-child(odd) .milestone-content:after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 20px;
+            border-width: 10px 0 10px 10px;
+            border-style: solid;
+            border-color: transparent transparent transparent #fff8f8;
+        }
+        
+        .milestone:nth-child(even) .milestone-content:after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 20px;
+            border-width: 10px 10px 10px 0;
+            border-style: solid;
+            border-color: transparent #fff8f8 transparent transparent;
+        }
+        
+        .date {
+            position: absolute;
+            width: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .photo {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background-color: #fad0c4;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+        
+        .photo:hover {
+            transform: scale(1.05);
+        }
+        
+        footer {
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: white;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .counter {
             font-size: 2rem;
-            color: #ee6c4d;
+            font-weight: bold;
+            margin: 2rem 0;
+            text-align: center;
         }
-
-        .card button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #ffb6b9;
+        
+        .counter span {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            margin: 0 0.2rem;
+            min-width: 3rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .music-player {
+            margin: 2rem auto;
+            text-align: center;
+        }
+        
+        .music-player button {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: white;
             border: none;
-            border-radius: 10px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 2rem;
             cursor: pointer;
             font-size: 1rem;
-            transition: background 0.3s;
+            margin: 0 0.5rem;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
-        .card button:hover {
-            background: #ff8c94;
+        
+        .music-player button:hover {
+            transform: scale(1.05);
         }
-
-        .message {
-            display: none;
-            margin-top: 20px;
-            color: #333;
+        
+        .wishes {
+            text-align: center;
+            margin: 3rem 0;
             font-size: 1.2rem;
-            animation: fadeIn 2s forwards;
         }
 
+        .signature {
+            text-align: right;
+            font-style: italic;
+            margin-top: 1rem;
+        }
+        
         @keyframes fadeIn {
             from {
                 opacity: 0;
                 transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
-        /* hearts animation */
-        .heart {
-            width: 15px;
-            height: 15px;
-            background: #ff6f91;
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%) rotate(45deg);
-            animation: fall 6s linear infinite;
-        }
-
-        .heart::before,
-        .heart::after {
-            content: '';
-            width: 15px;
-            height: 15px;
-            background: #ff6f91;
-            position: absolute;
-            border-radius: 50%;
-        }
-
-        .heart::before {
-            top: -7.5px;
-            left: 0;
-        }
-
-        .heart::after {
-            left: -7.5px;
-            top: 0;
-        }
-
-        @keyframes fall {
-            0% {
-                top: -20px;
-                opacity: 1;
-            }
-
-            100% {
-                top: 110vh;
+        
+        @keyframes slideUp {
+            from {
                 opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.1);
+            }
+            50% {
+                transform: scale(1);
+            }
+            75% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .heartbeat {
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+            color: #ff6b6b;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .timeline:before {
+                left: 30px;
+            }
+            
+            .milestone {
+                flex-direction: row !important;
+            }
+            
+            .milestone-content {
+                width: calc(100% - 60px);
+                margin-left: 60px;
+            }
+            
+            .milestone:nth-child(odd) .milestone-content:after,
+            .milestone:nth-child(even) .milestone-content:after {
+                left: -10px;
+                right: auto;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent #fff8f8 transparent transparent;
+            }
+            
+            .date {
+                left: 30px;
+                width: auto;
+                transform: none;
             }
         }
     </style>
 </head>
-
 <body>
+    <div class="container">
+        <header>
+            <h1>一个月纪念日快乐！</h1>
+            <p class="subtitle">写给宝贝的纪念~</p>
+            
+            <!-- 这里会添加随机漂浮的爱心 -->
+        </header>
+        
+        <div class="content">
+            <div class="message">
+                <h2 class="english">Dear 蹦蹦公主，</h2>
+                <p>
+                    今天是我们相伴走过的第一个月，这短暂而美妙的时光，已然成为我生命中最柔软、最珍贵的一段记忆。我曾想把你比作夏日，可你比夏日更温柔，比暖风更沁人心脾。五月的繁花或许会被骤起的狂风惊扰，夏天的美好也终会随时光匆匆逝去，而你，却在我的心中留下了永恒。
+                </p>
+                <p>
+                    我喜欢你的笑容，温暖而明亮；我喜欢你的声音，清澈而温柔；我喜欢你的一切，仿佛每一寸都恰好生长在我的心上。感谢你走进我的世界，从此生命多了一抹明媚的光，日子也多了一份温暖的期待。
+                </p>
+            </div>
 
-    <div class="card" id="card">
-        <h1>🎂 Happy Birthday! 🎂</h1>
-        <button onclick="showMessage()">点击我 🎁</button>
-        <div class="message" id="message">
-            <p>Dear陈蹦蹦殿下，祝你生日快乐呀！🎉</p>
-            <p>愿你每天都像今天一样被爱与幸福包围！💖</p>
-            <p>新的一岁要继续做那颗最亮的星星哦～🎂</p>
+            <div class="counter">
+                <p>我们已经在一起：</p>
+                <div>
+                    <span id="days">30</span> 天
+                    <span id="hours">0</span> 小时
+                    <span id="minutes">0</span> 分钟
+                    <span id="seconds">0</span> 秒
+                </div>
+            </div>
+
+            <div class="wishes">
+                <p>未来还有无数的日子等待着我们去探索，还有更多第一次等待我们去共同创造。</p>
+                <p>无论阳光灿烂或风雨交加，我都会一直陪在你身旁，共享人生的每一处风景，守护我们的每一寸美好。</p>
+                <p>我爱你 <span class="heartbeat">❤️</span></p>
+
+                <div class="signature">
+                    <p class="english">Larry</p>
+                    <p>2025年5月10日</p>
+                </div>
+            </div>
         </div>
+        
+        <footer>
+            <p>© 2025 Laurence</p>
+        </footer>
     </div>
-
-    <!-- Hearts -->
+    
     <script>
-        function createHearts() {
+        // 创建随机漂浮的爱心
+        const header = document.querySelector('header');
+        const heartSymbols = ['❤️', '💕', '💖', '💘', '💓', '💗', '💞'];
+        
+        for (let i = 0; i < 20; i++) {
             const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = 4 + Math.random() * 4 + 's';
-            document.body.appendChild(heart);
-
-            setTimeout(() => {
-                heart.remove();
-            }, 8000);
+            heart.className = 'heart';
+            heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.style.left = `${Math.random() * 100}%`;
+            heart.style.top = `${Math.random() * 100}%`;
+            heart.style.fontSize = `${Math.random() * 2 + 1}rem`;
+            heart.style.animationDuration = `${Math.random() * 4 + 3}s`;
+            heart.style.animationDelay = `${Math.random() * 5}s`;
+            header.appendChild(heart);
         }
-        setInterval(createHearts, 300);
-
-        function showMessage() {
-            const message = document.getElementById('message');
-            message.style.display = 'block';
-
-            // 可以加烟花或其他效果
-            confettiEffect();
+        
+        // 倒计时功能
+        function updateCounter() {
+            // 设置开始日期为2025年4月11日伦敦冬令时18:30
+            const startDate = new Date('2025-04-11T18:30:00Z');
+            
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
         }
+        
+        // 初始更新并每秒更新一次
+        updateCounter();
+        setInterval(updateCounter, 1000);
+        
 
-        function confettiEffect() {
-            for (let i = 0; i < 100; i++) {
-                const confetti = document.createElement('div');
-                confetti.style.position = 'absolute';
-                confetti.style.width = '5px';
-                confetti.style.height = '5px';
-                confetti.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
-                confetti.style.top = Math.random() * 100 + 'vh';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.opacity = 0;
-                confetti.style.transform = `scale(${Math.random()})`;
-                confetti.style.transition = 'all 2s ease';
-                document.body.appendChild(confetti);
-
-                setTimeout(() => {
-                    confetti.style.top = Math.random() * 50 + 'vh';
-                    confetti.style.opacity = 1;
-                    confetti.style.transform = 'scale(1)';
-                }, 100);
-
-                setTimeout(() => {
-                    confetti.remove();
-                }, 2500);
-            }
-        }
+        
+        // 页面加载时的动画效果
+        document.addEventListener('DOMContentLoaded', () => {
+            // 初始化倒计时
+            updateCounter();
+        });
     </script>
 </body>
-
 </html>
